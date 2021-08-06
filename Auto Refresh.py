@@ -22,20 +22,29 @@ def click(x,y):
 #pyautogui.scroll(amount_to_scroll, x=moveToX, y=moveToY)
 #Scroll at semi random place
 #Aprox place X: 1263 Y:  590
-
+#number of visual inspections done on screen
 contador=0
+#number of coven bought
+cont_coven=0
+#number of mystic bought
+cont_mystic=0
+#number of refresh done
+cont_refresh=0
+
+
 while keyboard.is_pressed('q') == False:
     
-    RB_pos=pyautogui.locateOnScreen('refresh_button.PNG')
+    RB_pos=pyautogui.locateOnScreen('refresh_button.PNG',confidence=0.90)
 #The confidence is added due to little variations in the background
-    Coven_pos=pyautogui.locateOnScreen('covenant.PNG',confidence=0.95)
-    Mystic_pos=pyautogui.locateOnScreen('mystic.PNG',confidence=0.95)
+    Coven_pos=pyautogui.locateOnScreen('covenant.PNG',confidence=0.90)
+    Mystic_pos=pyautogui.locateOnScreen('mystic.PNG',confidence=0.90)
 #Checks for covenant
     if (Coven_pos) != None:
-        time.sleep(0.5)
+        Coven_pos=pyautogui.locateOnScreen('covenant.PNG',confidence=0.90)
         print("Buy Covenant Summons.")
         contador=0
         Coven_point=pyautogui.center(Coven_pos)
+        
         #print("La pos en x seria...",Coven_point[0],"\nLa pos en y seria...", Coven_point[1])
         #Respecto de la pos original +800 en x y mas 50 en y es aprox donde esta el boton cuando el juego esta full screen
         click(Coven_point[0]+800, Coven_point[1]+50)
@@ -45,52 +54,57 @@ while keyboard.is_pressed('q') == False:
         Buy_button_Covenant_point=pyautogui.center(Buy_button_Covenant_pos)
         click(Buy_button_Covenant_point[0], Buy_button_Covenant_point[1])
         click(Buy_button_Covenant_point[0], Buy_button_Covenant_point[1])
-        contador=0
+        cont_coven+=1
+        print("Covenant Summons bought=",cont_coven)
     else:
-        print("No Covenant summons to buy.")
-        
+        time.sleep(0.05)
+        #print("No Covenant summons to buy.")
         #print(contador)
         
 
 #checks for mystic
     if (Mystic_pos) != None:
-        
+        Mystic_pos=pyautogui.locateOnScreen('mystic.PNG',confidence=0.90)
         print("Buy Mystic Summons.")
         contador=0
         Mystic_point=pyautogui.center(Mystic_pos)
+        #print("x=",Mystic_point[0],"y=",Mystic_point[1])
         #print("La pos en x seria...",Mystic_point[0],"\nLa pos en y seria...", Mystic_point[1])
         #Respecto de la pos original +800 en x y mas 50 en y es aprox donde esta el boton cuando el juego esta full screen
-        click(Mystic_point[0]+800, Mystic_point[1]+50)
-        click(Mystic_point[0]+800, Mystic_point[1]+50)
+        click(Mystic_point[0]+800, Mystic_point[1]+0)
+        click(Mystic_point[0]+800, Mystic_point[1]+0)
         time.sleep(0.5)#wait for confirm button
         Buy_button_Mystic_pos=pyautogui.locateOnScreen('Buy_button_Mystic.PNG')
         Buy_button_Mystic_point=pyautogui.center(Buy_button_Mystic_pos)
         click(Buy_button_Mystic_point[0], Buy_button_Mystic_point[1])
         click(Buy_button_Mystic_point[0], Buy_button_Mystic_point[1])
-        contador=0
+        cont_mystic+=1
+        print("Covenant Summons bought=",cont_mystic)
     else:
-        time.sleep(0.5)
-        print("No Mystic summons to buy.")
+        #print("No Mystic summons to buy.")
         click(x=1263,y=590)
         pyautogui.scroll(-5, x=1263, y=590)
         contador = contador + 1
         #print(contador)
-        time.sleep(0.5)
+        #time.sleep(0.5)
         
-#Finally refreshes
+#Double check in case of lag
     if contador==2 :
         pyautogui.scroll(5, x=1263, y=590)
         time.sleep(0.5)
+#Finally refreshes
     if contador>2 :
         time.sleep(0.5)
         RB_point=pyautogui.center(RB_pos)
         click(RB_point[0], RB_point[1])
         click(RB_point[0], RB_point[1])
-        time.sleep(1)#wait for confirm to appear
+        time.sleep(0.5)#wait for confirm to appear
         Confirm_pos=pyautogui.locateOnScreen('confirm button.PNG')
         Confirm_point=pyautogui.center(Confirm_pos)
         click(Confirm_point[0], Confirm_point[1])
         click(Confirm_point[0], Confirm_point[1])
         contador=0
         time.sleep(0.5)
+        cont_refresh+=1
+        print("Refresh Done=",cont_refresh)
         
