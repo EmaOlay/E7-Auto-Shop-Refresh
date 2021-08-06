@@ -10,3 +10,5 @@ pip install pywin32<br>
 pip install keyboard<br>
 pip install pyautogui<br>
 pip install opencv-python<br>
+
+Lastly take your own images pls don't trust mine many problems can be solved doing that once the program is running.
