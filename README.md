@@ -5,6 +5,7 @@ I made it for blue stacks(because of latency) and full screen,1080p.(beacause of
 If anyone wants to comment on anything fell free.<br>
 Lastly, since there hasn't been much interest in this i'll probably leave it as is.<br>
 I recommend to anyone new to python to install it with the anaconda distribution and don't forget to isntall the modules.<br>
+To do this open the Anaconda Promt and enter the following commands.<br>
 pip install pywin32<br>
 pip install keyboard<br>
 pip install pyautogui<br>
